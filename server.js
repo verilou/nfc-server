@@ -1,14 +1,18 @@
-const Koa = require('koa')
-const app = new Koa()
+const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
 
-const sequelize = require('./core/sequelize')
-const database = require('./core/database')
+const sequelize = require('./database/sequelize');
+const connect = require('./database/connect');
+const responseTime = require('./utils/responseTime');
+const routes = require('./routes');
 
-database(sequelize)
+connect(sequelize);
 
-app.use((ctx) => {
-	ctx.body = 'Hello Koa'
-})
+const app = new Koa();
+app.use(bodyParser());
+app.use(responseTime);
 
-app.listen(3000)
-console.log('Server is running')
+app.use(routes);
+
+app.listen(3000);
+console.log('Server is running');

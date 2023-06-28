@@ -1,5 +1,6 @@
-const { Sequelize } = require('sequelize')
+const { Sequelize } = require('sequelize');
 const models = require('./models');
+const associations = require('./associations');
 
 const sequelize = new Sequelize('nfc-server', '', '', {
 	host: 'localhost',
@@ -8,8 +9,8 @@ const sequelize = new Sequelize('nfc-server', '', '', {
 		freezeTableName: true,
 	},
 	logging: false,
-})
+});
 
 models(sequelize);
-
-module.exports = sequelize
+associations(sequelize);
+module.exports = sequelize;
