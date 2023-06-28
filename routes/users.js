@@ -1,7 +1,8 @@
 const Router = require('@koa/router');
-const users = new Router({ prefix: '/users' });
 const usersList = require('../controllers/users/index');
 const userCreate = require('../controllers/users/create');
+
+const users = new Router({ prefix: '/users' });
 
 users.get('/', usersList);
 users.post('/', userCreate);

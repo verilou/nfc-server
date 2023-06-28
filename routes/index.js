@@ -1,7 +1,8 @@
 const compose = require('koa-compose');
-const userRouter = require('./users');
+const user = require('./users');
+const client = require('./clients')
 
-const router = [userRouter];
+const router = [user, client];
 
 const middlewares = router.reduce((acc, cur) => {
 	acc.push(cur.routes(), cur.allowedMethods());

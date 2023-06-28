@@ -1,6 +1,4 @@
-const {
-	models: { Client },
-} = require('../database/sequelize');
+const { Client, User } = require('../core/database');
 
-module.exports.getAllUsers = () => Client.findAll();
-module.exports.createUser = (newClient) => Client.create(newClient);
+module.exports.getAllClients = () => Client.findAll({ include: User });
+module.exports.createClient = (newClient) => Client.create(newClient);

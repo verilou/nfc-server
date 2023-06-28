@@ -1,8 +1,8 @@
 const { createClient } = require('../../orm/clients');
 
 module.exports = (queryInputData) => {
-	const { fullName, email } = queryInputData;
-	if (fullName && email) {
-		return createClient({ fullName, email });
+	const { name } = queryInputData;
+	if (name) {
+		return createClient({ name });
 	}
 };
