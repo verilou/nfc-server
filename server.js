@@ -1,16 +1,14 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
-
-const sequelize = require('./core/sequelize');
-const connect = require('./core/connect');
+const session = require('koa-session');
+const passport = require('./middlewares/passport');
 const responseTime = require('./utils/responseTime');
 const routes = require('./routes');
-const assosiations = require('./core/associations');
-
-connect(sequelize);
-assosiations(sequelize);
-
 const app = new Koa();
+
+app.keys = ['your-session-secret'];
+app.use(session({}, app));
+
 app.use(
 	bodyParser({
 		onError(err, ctx) {
@@ -18,9 +16,10 @@ app.use(
 		},
 	})
 );
-app.use(responseTime);
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(responseTime);
 app.use(routes);
 
 app.listen(3000);
-console.log('Server is running');
