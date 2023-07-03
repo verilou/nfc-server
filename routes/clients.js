@@ -6,4 +6,5 @@ const clients = new Router({ prefix: '/clients' });
 
 clients.get('/', clientsList);
 clients.post('/', clientsCreate);
+
 module.exports = clients;
