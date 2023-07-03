@@ -25,13 +25,14 @@ passport.use(
 			try {
 				const user = await findUserByEmailWithPassword(email);
 				if (
+					user &&
 					email === user.email &&
 					bcrypt.compare(password, user.password)
 				) {
 					delete user.dataValues.password;
 					done(null, user);
 				} else {
-					done(null, false);
+					done(null, false, { message: 'User not found' });
 				}
 			} catch (err) {
 				console.log(err);

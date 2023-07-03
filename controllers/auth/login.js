@@ -1,5 +1,5 @@
 const passport = require('koa-passport');
-module.exports = (ctx) =>
-	passport.authenticate('local', (err, user) => {
-		ctx.body = { user };
-	})(ctx);
+module.exports = passport.authenticate('local', {
+    successRedirect: '/profile',
+	failureRedirect: '/',
+});
