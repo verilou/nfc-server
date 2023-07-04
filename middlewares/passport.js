@@ -4,11 +4,11 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const { findUserById, findUserByEmailWithPassword } = require('../orm/users');
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
 	done(null, user.id);
 });
 
-passport.deserializeUser(async function (id, done) {
+passport.deserializeUser(async (id, done) => {
 	try {
 		const user = await findUserById(id);
 		done(null, user);
@@ -21,7 +21,6 @@ passport.use(
 	new LocalStrategy(
 		{ usernameField: 'email', passwordField: 'password' },
 		async (email, password, done) => {
-			console.log(email);
 			try {
 				const user = await findUserByEmailWithPassword(email);
 				if (
@@ -35,7 +34,6 @@ passport.use(
 					done(null, false, { message: 'User not found' });
 				}
 			} catch (err) {
-				console.log(err);
 				done(err);
 			}
 		}

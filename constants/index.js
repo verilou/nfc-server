@@ -1,0 +1,19 @@
+const WEB_SITE = 'WEB_SITE';
+const LINKEDIN = 'LINKEDIN';
+const WHATSAPP = 'WHATSAPP';
+const LINK = 'LINK';
+const IMG_URL = 'IMG_URL';
+const TITLE = 'TITLE';
+const FULLNAME = 'FULLNAME';
+const CONTACT_FILE = 'CONTACT_FILE';
+
+module.exports.CARD_CONTENT_TYPE = [
+	WEB_SITE,
+	LINKEDIN,
+	WHATSAPP,
+	LINK,
+	IMG_URL,
+	TITLE,
+	FULLNAME,
+    CONTACT_FILE,
+];

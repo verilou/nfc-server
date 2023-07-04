@@ -8,8 +8,5 @@ module.exports = async (ctx) => {
 		ctx.body = user;
 	} else {
 		ctx.status = StatusCodes.BAD_REQUEST;
-		ctx.body = {
-			message: "La requete n'est pas au bon format",
-		};
 	}
 };

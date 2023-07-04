@@ -4,12 +4,23 @@ const connect = require('../core/connect');
 const user = require('./User')(sequelize);
 const client = require('./Client')(sequelize);
 const card = require('./Card')(sequelize);
+const cardContent = require('./CardContent')(sequelize);
 
 connect(sequelize);
 
-user.belongsTo(client);
-client.hasMany(user);
+card.belongsTo(user, { as: 'createdByUser' });
+card.belongsTo(client);
+card.hasMany(cardContent);
 
-module.exports.User = user;
-module.exports.Client = client;
-module.exports.Card = card;
+cardContent.belongsTo(card);
+
+user.belongsTo(client);
+user.hasMany(card, { foreignKey: 'createdByUserId' });
+
+client.hasMany(user);
+client.hasMany(card);
+
+module.exports.User = sequelize.models.user;
+module.exports.Client = sequelize.models.client;
+module.exports.Card = sequelize.models.card;
+module.exports.CardContent = sequelize.models.cardContent;

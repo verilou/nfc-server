@@ -1,8 +1,9 @@
 const Router = require('@koa/router');
 const login = require('../controllers/auth/login');
 const profile = require('../controllers/auth/profile');
+const authRoute = require('../middlewares/authRoute');
 const auth = new Router();
 
 auth.post('/login', login);
-auth.get('/profile', profile);
+auth.get('/profile', authRoute, profile);
 module.exports = auth;

@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const createClient = require('../../services/client/create');
+const createClient = require('../../services/clients/create');
 
 module.exports = async (ctx) => {
 	const { body } = ctx.request;
@@ -8,8 +8,5 @@ module.exports = async (ctx) => {
 		ctx.body = client;
 	} else {
 		ctx.status = StatusCodes.BAD_REQUEST;
-		ctx.body = {
-			message: "La requete n'est pas au bon format",
-		};
 	}
 };
