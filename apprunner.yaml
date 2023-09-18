@@ -5,5 +5,8 @@ build:
     build:
       - npm install --production
       - npm i -g pm2                             
-run:                              
+run:                   
+  network:
+    port: 3000
+    env: APP_PORT           
   command: npx pm2 app.js
