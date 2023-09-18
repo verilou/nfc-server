@@ -4,9 +4,9 @@ build:
   commands:    
     build:
       - npm install --production
-      - npm i -g pm2                             
+      - npm i pm2 -g                             
 run:                   
   network:
     port: 3000
     env: APP_PORT           
-  command: npx pm2 server.js
+  command: npx pm2-runtime start server.js
