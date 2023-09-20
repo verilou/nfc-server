@@ -9,7 +9,9 @@ run:
   network:
     port: 3000
     env: APP_PORT           
-  command: npx pm2 start server.js
+  command: 
+    - pm2 startup
+    - pm2-runtime start server.js
   secrets:
     - name: rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e
       value-from: arn:aws:secretsmanager:eu-west-1:854055669761:secret:rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e-Feypjs
