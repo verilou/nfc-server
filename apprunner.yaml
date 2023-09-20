@@ -9,8 +9,7 @@ run:
   network:
     port: 3000
     env: APP_PORT           
-  command: 
-    - pm2 startup
+  command:
     - pm2-runtime start npm --prod
   secrets:
     - name: rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e
