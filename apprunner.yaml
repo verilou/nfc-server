@@ -11,7 +11,7 @@ run:
     env: APP_PORT           
   command: 
     - pm2 startup
-    - pm2-runtime start server.js
+    - pm2-runtime start npm --prod
   secrets:
     - name: rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e
       value-from: arn:aws:secretsmanager:eu-west-1:854055669761:secret:rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e-Feypjs
