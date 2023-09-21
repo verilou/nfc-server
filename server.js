@@ -3,6 +3,8 @@ const session = require('koa-session');
 const cors = require('@koa/cors');
 require('dotenv').config();
 
+console.log(process.env)
+
 const bodyParser = require('./middlewares/bodyParser');
 const passport = require('./middlewares/passport');
 const responseTime = require('./utils/responseTime');
