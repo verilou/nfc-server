@@ -1,20 +1,30 @@
 const { Sequelize } = require('sequelize');
-console.log('connect')
+
+if (process.env.NODE_ENV === 'development') {
+	process.env['rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e'] =
+		process.env['auth-db-dev'];
+}
+
+const db_auth = JSON.parse(
+	process.env['rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e']
+);
+const db_info = JSON.parse(process.env['prod-db-name']);
+
 const sequelize = new Sequelize(
-	process.env.DB_NAME,
-	process.env.username,
-	process.env.password,
+	db_info.DB_NAME,
+	db_auth.username,
+	db_auth.password,
 	{
-		host: process.env.HOST,
+		host: db_info.HOST,
 		dialect: 'postgres',
 		define: {
 			freezeTableName: true,
 		},
-        ssl: true,
+		ssl: true,
 		dialectOptions: {
 			ssl: {
-                require: true,
-                rejectUnauthorized: false
+				require: true,
+				rejectUnauthorized: false,
 			},
 		},
 		logging: false,
