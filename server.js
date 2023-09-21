@@ -3,7 +3,7 @@ const session = require('koa-session');
 const cors = require('@koa/cors');
 require('dotenv').config();
 
-console.log(process.env)
+console.log(process.env.username, process.env["rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e"])
 
 const bodyParser = require('./middlewares/bodyParser');
 const passport = require('./middlewares/passport');
