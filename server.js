@@ -1,14 +1,13 @@
 const Koa = require('koa');
 const session = require('koa-session');
 const cors = require('@koa/cors');
+require('dotenv').config();
 
 const bodyParser = require('./middlewares/bodyParser');
 const passport = require('./middlewares/passport');
 const responseTime = require('./utils/responseTime');
 const routes = require('./routes');
-
 const app = new Koa();
-console.log(process.env)
 app.use(cors({ credentials: true }));
 app.keys = ['your-session-secret'];
 app.use(session({}, app));

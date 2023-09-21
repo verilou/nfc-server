@@ -12,5 +12,8 @@ run:
     env: APP_PORT           
   command: "npx pm2-runtime server.js"
   secrets:
+    - name: prod-db-name
+      value-from: arn:aws:secretsmanager:eu-west-1:854055669761:secret:prod-db-name-yhpq6S
+      
     - name: "rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e"
       value-from: "arn:aws:secretsmanager:eu-west-1:854055669761:secret:rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e-Feypjs"
