@@ -1,10 +1,11 @@
 version: 1.0
 runtime: nodejs16
 build:
-  commands:    
+  commands:
+    pre-build:
+      - npm i pm2 -g     
     build:
-      - npm install --production
-      - npm i pm2 -g                             
+      - npm install --production                      
 run:                   
   network:
     port: 3000
