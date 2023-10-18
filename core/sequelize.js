@@ -27,6 +27,7 @@ module.exports = (async () => {
 				})
 			),
 		]);
+        console.log("DEBUG")
 		const secretParsed = {};
 		secrets.forEach((secret) => {
 			secretParsed[secret.Name] = JSON.parse(secret.SecretString);
