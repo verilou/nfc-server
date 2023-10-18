@@ -1,3 +1,4 @@
+console.log('import user')
 const { User, Client } = require('../models');
 
 module.exports.getAllUsers = () =>
