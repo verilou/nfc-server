@@ -3,7 +3,7 @@ const {
 	SecretsManagerClient,
 	GetSecretValueCommand,
 } = require('@aws-sdk/client-secrets-manager');
-console.log(process.env.SECRET_RDS, process.env.SECRET_DB_HOST)
+
 const secret_rds = process.env.SECRET_RDS;
 const secret_db_host = process.env.SECRET_DB_HOST;
 

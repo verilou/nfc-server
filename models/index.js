@@ -1,7 +1,6 @@
 (async () => {
 	const sequelize = await require('../core/sequelize');
 	const connect = require('../core/connect');
-	console.log(sequelize);
 	const user = require('./User')(sequelize);
 	const client = require('./Client')(sequelize);
 	const card = require('./Card')(sequelize);
