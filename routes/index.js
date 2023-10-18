@@ -11,6 +11,4 @@ const middlewares = router.reduce((acc, cur) => {
 	return acc;
 }, []);
 
-console.log(middlewares.forEach(test => console.log(test.router?.stack.map(e => e.path))))
-
 module.exports = compose(middlewares);
