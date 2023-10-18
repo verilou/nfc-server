@@ -1,34 +1,57 @@
 const { Sequelize } = require('sequelize');
+const {
+	SecretsManagerClient,
+	GetSecretValueCommand,
+} = require('@aws-sdk/client-secrets-manager');
+console.log(process.env.SECRET_RDS, process.env.SECRET_DB_HOST)
+const secret_rds = process.env.SECRET_RDS;
+const secret_db_host = process.env.SECRET_DB_HOST;
 
-if (process.env.NODE_ENV === 'development') {
-	process.env['rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e'] =
-		process.env['auth-db-dev'];
-}
+const client = new SecretsManagerClient({
+	region: 'eu-west-1',
+});
 
-const db_auth = JSON.parse(
-	process.env['rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e']
-);
-const db_info = JSON.parse(process.env['prod-db-name']);
-
-const sequelize = new Sequelize(
-	db_info.DB_NAME,
-	db_auth.username,
-	db_auth.password,
-	{
-		host: db_info.HOST,
-		dialect: 'postgres',
-		define: {
-			freezeTableName: true,
-		},
-		ssl: true,
-		dialectOptions: {
-			ssl: {
-				require: true,
-				rejectUnauthorized: false,
-			},
-		},
-		logging: false,
+module.exports = (async () => {
+	try {
+		const secrets = await Promise.all([
+			client.send(
+				new GetSecretValueCommand({
+					SecretId: secret_rds,
+					VersionStage: 'AWSCURRENT', // VersionStage defaults to AWSCURRENT if unspecified
+				})
+			),
+			client.send(
+				new GetSecretValueCommand({
+					SecretId: secret_db_host,
+					VersionStage: 'AWSCURRENT', // VersionStage defaults to AWSCURRENT if unspecified
+				})
+			),
+		]);
+		const secretParsed = {};
+		secrets.forEach((secret) => {
+			secretParsed[secret.Name] = JSON.parse(secret.SecretString);
+		});
+		return new Sequelize(
+			secretParsed[secret_db_host].DB_NAME,
+			secretParsed[secret_rds].username,
+			secretParsed[secret_rds].password,
+			{
+				host: secretParsed[secret_db_host].HOST,
+				dialect: 'postgres',
+				define: {
+					freezeTableName: true,
+				},
+				ssl: true,
+				dialectOptions: {
+					ssl: {
+						require: true,
+						rejectUnauthorized: false,
+					},
+				},
+				logging: false,
+			}
+		);
+	} catch (error) {
+		console.log(error);
 	}
-);
-
-module.exports = sequelize;
+})();
