@@ -1,6 +1,7 @@
 (async () => {
     console.log("import user inside async")
 	const sequelize = await require('../core/sequelize');
+    console.log(sequelize)
 	const connect = require('../core/connect');
 	const user = require('./User')(sequelize);
 	const client = require('./Client')(sequelize);
