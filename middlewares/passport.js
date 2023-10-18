@@ -26,7 +26,7 @@ passport.use(
 				if (
 					user &&
 					email === user.email &&
-					bcrypt.compare(password, user.password)
+					await bcrypt.compare(password, user.password)
 				) {
 					delete user.dataValues.password;
 					done(null, user);
