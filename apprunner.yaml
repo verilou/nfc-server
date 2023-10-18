@@ -13,7 +13,7 @@ run:
     command: 'npx pm2-runtime server.js'
     secrets:
         - name: SECRET_DB_HOST
-          value-from: prod-db-name
+          value: prod-db-name
 
         - name: SECRET_RDS
-          value-from: "rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e"
+          value: rds!db-f6488152-e9bc-4ff7-a4b5-aa75d124f76e
