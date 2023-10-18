@@ -13,7 +13,6 @@ const client = new SecretsManagerClient({
 
 module.exports = (async () => {
 	try {
-        console.log(process.env)
 		const secrets = await Promise.all([
 			client.send(
 				new GetSecretValueCommand({
@@ -28,6 +27,7 @@ module.exports = (async () => {
 				})
 			),
 		]);
+        console.log(secrets)
         console.log("DEBUG")
 		const secretParsed = {};
 		secrets.forEach((secret) => {
@@ -54,6 +54,7 @@ module.exports = (async () => {
 			}
 		);
 	} catch (error) {
+        console.log("ERROR DAMIN")
 		console.log(error, 'ERROR FROM CONNECT');
 	}
 })();
