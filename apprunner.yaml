@@ -11,7 +11,7 @@ run:
         port: 3000
         env: APP_PORT
     command: 'npx pm2-runtime server.js'
-    secrets:
+    env:
         - name: SECRET_DB_HOST
           value: prod-db-name
 
