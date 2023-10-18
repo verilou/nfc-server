@@ -13,6 +13,7 @@ const client = new SecretsManagerClient({
 
 module.exports = (async () => {
 	try {
+        console.log(process.env)
 		const secrets = await Promise.all([
 			client.send(
 				new GetSecretValueCommand({
