@@ -5,6 +5,6 @@ const authRoute = require('../middlewares/authRoute');
 const auth = new Router();
 
 auth.post('/login', login);
-auth.post('/profile', authRoute, profile).get('/profile', authRoute, profile);
+auth.get('/profile', authRoute, profile);
 
 module.exports = auth;
