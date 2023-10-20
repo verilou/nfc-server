@@ -10,7 +10,17 @@ const routes = require('./routes');
 const app = new Koa();
 app.use(cors({ credentials: true }));
 app.keys = ['your-session-secret'];
-app.use(session({}, app));
+app.use(
+	session(
+		{
+            secure: true,
+			sameSite: 'none',
+		},
+		app
+	)
+);
+
+app.proxy = true;
 
 app.use(bodyParser);
 app.use(passport.initialize());

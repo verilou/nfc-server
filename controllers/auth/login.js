@@ -5,6 +5,7 @@ module.exports = async (ctx) => {
 			ctx.body = 'Wrong credential';
 			ctx.throw(401);
 		} else {
+            ctx.cookies.set('domain', 'fnpppmhnmb.eu-west-1.awsapprunner.com')
 			ctx.body = user;
 			return ctx.login(user);
 		}
