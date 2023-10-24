@@ -10,7 +10,7 @@ const routes = require('./routes');
 const app = new Koa();
 const isProd = process.env.NODE_ENV === 'production';
 app.use(
-	cors({ credentials: true, origin: isProd ? 'api.louiscastel.fr' : '*' })
+	cors({ credentials: true, origin: isProd ? 'louiscastel.fr' : '*' })
 );
 app.keys = ['your-session-secret'];
 app.use(
