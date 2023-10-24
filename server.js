@@ -13,8 +13,8 @@ app.keys = ['your-session-secret'];
 app.use(
 	session(
 		{
-            secure: true,
-			sameSite: 'none',
+            secure: process.env.NODE_ENV === 'production',
+
 		},
 		app
 	)
