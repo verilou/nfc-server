@@ -24,7 +24,7 @@ app.use(
 
 app.use(async (ctx, next) => {
 	await next();
-	console.log(ctx.headers.origin);
+	console.log(ctx.headers.origin, ctx.res);
 });
 app.use(
 	session(
