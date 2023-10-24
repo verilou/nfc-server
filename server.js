@@ -9,12 +9,18 @@ const responseTime = require('./utils/responseTime');
 const routes = require('./routes');
 const app = new Koa();
 const isProd = process.env.NODE_ENV === 'production';
+app.proxy = true;
+console.log('havebe')
 console.log(
 	isProd,
 	process.env.NODE_ENV,
 	isProd ? 'https://louiscastel.fr' : '*'
 );
 app.keys = ['your-session-secret'];
+app.use(async (ctx, next) => {
+	ctx.set('Access-Control-Allow-Origin', '*');
+    await next();
+});
 app.use(
 	cors({
 		origin: (ctx) => {
@@ -42,8 +48,10 @@ app.use(
 	)
 );
 
-app.proxy = true;
-
+app.use(async (ctx, next) => {
+	ctx.set('Access-Control-Allow-Origin', '*');
+    await next();
+});
 app.use(bodyParser);
 app.use(passport.initialize());
 app.use(passport.session());
