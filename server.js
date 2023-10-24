@@ -9,9 +9,7 @@ const responseTime = require('./utils/responseTime');
 const routes = require('./routes');
 const app = new Koa();
 const isProd = process.env.NODE_ENV === 'production';
-app.use(
-	cors({ credentials: true, origin: isProd ? 'https://louiscastel.fr' : '*' })
-);
+
 app.keys = ['your-session-secret'];
 app.use(
 	session(
@@ -27,6 +25,9 @@ app.proxy = true;
 app.use(bodyParser);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(
+	cors({ credentials: true, origin: isProd ? 'https://louiscastel.fr' : '*' })
+);
 app.use(responseTime);
 app.use(routes);
 
