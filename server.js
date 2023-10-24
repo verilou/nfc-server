@@ -12,6 +12,9 @@ const isProd = process.env.NODE_ENV === 'production';
 console.log(isProd, process.env.NODE_ENV)
 app.keys = ['your-session-secret'];
 app.use(
+	cors({ origin: isProd ? 'https://louiscastel.fr' : '*' })
+);
+app.use(
 	session(
 		{
 			secure: isProd,
@@ -25,9 +28,7 @@ app.proxy = true;
 app.use(bodyParser);
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(
-	cors({ credentials: true, origin: isProd ? 'https://louiscastel.fr' : '*' })
-);
+
 app.use(responseTime);
 app.use(routes);
 
