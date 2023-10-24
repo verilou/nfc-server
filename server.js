@@ -9,7 +9,7 @@ const responseTime = require('./utils/responseTime');
 const routes = require('./routes');
 const app = new Koa();
 const isProd = process.env.NODE_ENV === 'production';
-console.log(isProd)
+console.log(isProd, process.env.NODE_ENV)
 app.keys = ['your-session-secret'];
 app.use(
 	session(
