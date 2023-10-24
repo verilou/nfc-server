@@ -9,7 +9,7 @@ const responseTime = require('./utils/responseTime');
 const routes = require('./routes');
 const app = new Koa();
 const isProd = process.env.NODE_ENV === 'production';
-app.proxy = true;
+
 console.log('havebe')
 console.log(
 	isProd,
