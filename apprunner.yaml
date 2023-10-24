@@ -8,7 +8,7 @@ run:
   network:
     port: 3000
     env: APP_PORT           
-  command: "node server.js"
+  command: "NODE_ENV=production node server.js"
   secrets:
     - name: prod-db-name
       value-from: arn:aws:secretsmanager:eu-west-1:854055669761:secret:prod-db-name-yhpq6S
