@@ -3,12 +3,15 @@ runtime: nodejs16
 build:
   commands:
     build:
-      - npm install --production                      
+      - npm install --omit=dev                  
 run:                   
   network:
     port: 3000
-    env: APP_PORT           
-  command: "NODE_ENV=production node server.js"
+    env: APP_PORT
+  env:
+    - name: NODE_ENV
+      value: production           
+  command: "node server.js"
   secrets:
     - name: prod-db-name
       value-from: arn:aws:secretsmanager:eu-west-1:854055669761:secret:prod-db-name-yhpq6S
