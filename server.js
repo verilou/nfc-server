@@ -18,14 +18,18 @@ app.keys = ['your-session-secret'];
 app.use(
 	cors({
 		origin: (ctx) => {
-            const validDomains = ['https://api.louiscastel.fr', 'http://localhost:3001' ];
-            console.log(ctx.request.header.origin)
-            if (validDomains.indexOf(ctx.request.header.origin) !== -1) {
-              return ctx.request.header.origin;
-            }
-            return validDomains[0]; // we can't return void, so let's return one of the valid domains
-          },
+			const validDomains = [
+				'https://api.louiscastel.fr',
+				'http://localhost:3001',
+			];
+			console.log(ctx.request.header.origin);
+			if (validDomains.indexOf(ctx.request.header.origin) !== -1) {
+				return ctx.request.header.origin;
+			}
+			return validDomains[0]; // we can't return void, so let's return one of the valid domains
+		},
 		credentials: true,
+		keepHeadersOnError: true,
 	})
 );
 
