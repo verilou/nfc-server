@@ -8,13 +8,15 @@ const passport = require('./middlewares/passport');
 const responseTime = require('./utils/responseTime');
 const routes = require('./routes');
 const app = new Koa();
-app.use(cors({ credentials: true }));
+const isProd = process.env.NODE_ENV === 'production';
+app.use(
+	cors({ credentials: true, origin: isProd ? 'api.louiscastel.fr' : '*' })
+);
 app.keys = ['your-session-secret'];
 app.use(
 	session(
 		{
-            secure: process.env.NODE_ENV === 'production',
-
+			secure: isProd,
 		},
 		app
 	)
